@@ -1,5 +1,6 @@
 # WOD_randomizer
 Simple script to pull a random WOD from crossfit.com (workout only) and can then be displayed on a monitor in your gym. Local HTML file displays a timer for ease of tracking/timing WODs. 
+Run the WOD_randomizer script and then browse to localhost:8080 (or wherever apache is configured for) to display. Would work best if running on a Raspberry Pi W that is connected to a monitor in your gym. Then, you could setup a cron to run daily at midnight to refresh the WOD automatically and have it displayed for use. 
 
 ![alt text](https://github.com/JasonBurnsInfosec/WOD_randomizer/blob/040812102749a0975bd35e6774b5f6510890cd5a/Screen%20Shot%202022-08-14%20at%203.22.55%20PM.png)
 

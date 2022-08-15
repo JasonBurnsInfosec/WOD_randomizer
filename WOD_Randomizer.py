@@ -6,18 +6,24 @@ import requests
 from bs4 import BeautifulSoup
 
 #generate random crossfit WOD
-ranyr = str(random.randint(17,21)) #generate a random year between 2017-2022
-ranmo = str(random.randint(1,12)).zfill(2) #generate a random month and add a leading 0 if needed
-randa = str(random.randint(1,28)).zfill(2) #generate a random day and add a leading 0 if needed
-wod = ranyr + ranmo + randa #combine the yr/mo/day in the format used on crossfit.com
-website = "https://crossfit.com/"+wod #actual WOD page
-
-#parse out only the workout
-page_response = requests.get(website, headers={'User-Agent': 'Mozilla/5.0'}, timeout=20) #pulls the random WOD webpage in full
-page_content = BeautifulSoup(page_response.content, "html.parser") #uses beautifulsoup to parse the webpage
-page_wod = str(page_content.find_all("div", {"class": "_wrapper_1uw7e_18 _text-block_1x7b4_17"})) #cuts webpage down to just the WOD section
-page_wod_clean = page_wod.lstrip("[").rstrip("]")
-
+page_wod_clean = ''
+def main():
+    global page_wod_clean
+    ranyr = str(random.randint(17,21)) #generate a random year between 2017-2022
+    ranmo = str(random.randint(1,12)).zfill(2) #generate a random month and add a leading 0 if needed
+    randa = str(random.randint(1,28)).zfill(2) #generate a random day and add a leading 0 if needed
+    wod = ranyr + ranmo + randa #combine the yr/mo/day in the format used on crossfit.com
+    website = "https://crossfit.com/"+wod #actual WOD page
+    #parse out only the workout
+    page_response = requests.get(website, headers={'User-Agent': 'Mozilla/5.0'}, timeout=50) #pulls the random WOD webpage in full
+    page_content = BeautifulSoup(page_response.content, "html.parser") #uses beautifulsoup to parse the webpage
+    page_wod = str(page_content.find_all("div", {"class": "_wrapper_1uw7e_18 _text-block_1x7b4_17"})) #cuts webpage down to just the WOD section
+    page_wod_clean = page_wod.lstrip("[").rstrip("]")
+while "wrapper" not in page_wod_clean or "Rest Day" in page_wod_clean:
+    main()
+    continue
+else:
+    print(page_wod_clean)
 #save WOD to local html for display
 html_clock = '''<!DOCTYPE html>
 <html lang="en" >

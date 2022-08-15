@@ -46,7 +46,7 @@ function checkTime(i) {
 
 </body>'''
 
-local_html = open("/opt/homebrew/var/www/index.html", "w") #open the local html file to write the WOD to
+local_html = open("/opt/homebrew/var/www/index.html", "w") #open the local html file to write the WOD to, you may need to update this on your system
 local_html.write(html_clock + '\n' + page_wod) #write output to local html file
 local_html.close #close local html file
 
